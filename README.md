@@ -1,21 +1,28 @@
 # luoxu-bot
-luoxu-bot 是类似于 [luoxu-web](https://github.com/lilydjwg/luoxu-web) 的 CJK 友好的 Telegram Bot，依赖于 [luoxu](https://github.com/lilydjwg/luoxu) 所创建的后端。
-
-# 测试环境
-- Python 3.7.9
-- pip 21.1.2
-> 开发中使用到的 Telethon 需要 Python 3+
+luoxu-bot 是依赖于 [luoxu](https://github.com/lilydjwg/luoxu) 后端的 Telegram Bot，以在不公开 luoxu 接口的情况下快速进行 CJK 消息的查询。使用 Kotlin 重构。
 
 # 配置
 - 前往 [luoxu](https://github.com/lilydjwg/luoxu) 根据相关内容配置并运行 luoxu，等待**消息索引完毕**
 > **由于 Telegram 的消息样式问题，建议修改 luoxu 项目中的 `luoxu/db.py` 文件，将 `SEARCH_LIMIT` 修改为 `10`**
 
-- 克隆 [本项目](https://github.com/TigerBeanst/luoxu-bot) ， 并使用 `pip3 install -r requirements.txt` 等方式安装依赖
-- 前往 [My Telegram](https://my.telegram.org/) ,获取 `API development tools` 中的 `api_id` 和 `api_hash`
-- 在 Telegram 中向 [@BotFather](https://t.me/botfather) 申请 Bot，获取 `bot token`（由`数字:数字字母`构成，如`1111122222:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`）
-- 在 Telegram 中向 [@getidsbot](https://t.me/getidsbot) 发送 `/start` 以获取你的 Telegram 账号 ID（`my_id`）
-- 打开 `config.py` 并填写相关字段（如果你在 luoxu 中修改了接口的端口或者前缀等，请同步修改）
-- 使用 `python3 main.py` 运行项目，当出现 `开摆` 时代表项目已启动，可以向自己的 Bot 尝试发送指令（请提前向自己的 Bot 激活 `/start`）
+- 前往 [GitHub Releases](https://github.com/TigerBeanst/luoxu-bot/releases) ， 下载获得 `luoxu-bot-?.?-all.jar` 文件；
+- 在 `luoxu-bot-?.?-all.jar` 同一个目录下创建 `config.yaml` 文件，内容在后文；
+- 上传至服务器（当然也可以本地），运行 `java -jar luoxu-bot-?.?-all.jar` 即可，请使用 `screen` 等程序保持 Bot 在终端关闭后亦持续运行，程序本身不处理后台运行事项。
+
+# config.yaml
+```yaml
+my-id: 19260817
+bot-token: 1111122222:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+local-proxy: 
+
+base-url: http://localhost:9008
+base-url-prefix: luoxu
+```
+1. `my-id` 为你的 Telegram 账号 ID，向 [@getidsbot](https://t.me/getidsbot) 发送 `/start` 可以获取
+2. `bot-token` 为你的 Bot Token，向 [@BotFather](https://t.me/botfather) 申请 Bot，获取 `bot-token`（由`数字:数字字母`构成，如`1111122222:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`）
+3. `local-proxy` 为你的代理，如 `socks5://127.0.0.1：7890`，留空则不使用代理
+4. `base-url` 为你的 luoxu 后端地址，如 `http://localhost:9008`
+5. `base-url-prefix` 为你的 luoxu 后端地址前缀，如 `luoxu`
 
 # 使用
 - `/list` 获取已索引群组的列表和相关信息
@@ -34,20 +41,17 @@ luoxu-bot 是类似于 [luoxu-web](https://github.com/lilydjwg/luoxu-web) 的 CJ
 > 搜索消息时，搜索字符串不区分简繁（会使用 OpenCC 自动转换），也不进行分词（请手动将可能不连在一起的词语以空格分开）。
 >
 > 搜索字符串支持以下功能：
-> 
+>
 > 1.以空格分开的多个搜索词是「与」的关系
-> 
+>
 > 2.使用 `OR`（全大写）来表达「或」条件
-> 
+>
 > 3.使用 `-` 来表达排除，如 `落絮 - 测试`
-> 
+>
 > 4.使用小括号来分组
 
 # 其他
-- **搜索结果只有一页时，可能会有多余的「下一页」按钮，问题不大，懒得修了**
-- 部分数据量过大的消息可能会让 Bot 一直保持在「少女祈祷中…」，建议换个详细点的词。一般是搜什么 test 之类的很容易出现在一条长消息里的（有人在群里直接粘贴发带了关键词的 log 之类的）
-- 请使用 `screen` 等程序保持 Bot 在终端关闭后亦持续运行
-- 可以使用已经配置在公网上的 API 吗？当然可以，但是这个项目出现的原因就是因为不想公开在公网上
+- 可以使用已经配置在公网上的 API 吗？当然可以，但是这个项目出现的原因就是因为不想 API 公开在公网上
 - 本项目没有代理字段的配置。经过各方面的考虑~~以及我懒得再改~~，我认为一般需要部署此项目的机器都已经能正常连接 Telegram
 
 # 为什么会有这个项目
@@ -59,5 +63,5 @@ luoxu 提供了 API 接口以供前端使用，但这也带来一个问题，如
 
 # 鸣谢
 - [@lilydjwg](https://github.com/lilydjwg) ，给您磕头！！！！！！
-- [@LonamiWebs/Telethon](https://github.com/LonamiWebs/Telethon)
+- [@kotlin-telegram-bot/kotlin-telegram-bot](https://github.com/kotlin-telegram-bot/kotlin-telegram-bot)
 - 我那会使用搜索引擎的双手和大脑

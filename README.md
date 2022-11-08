@@ -13,6 +13,7 @@ luoxu-bot 是依赖于 [luoxu](https://github.com/lilydjwg/luoxu) 后端的 Tele
 ```yaml
 my-id: 19260817
 bot-token: 1111122222:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+show-log: false
 local-proxy: 
 
 base-url: http://localhost:9008
@@ -20,9 +21,10 @@ base-url-prefix: luoxu
 ```
 1. `my-id` 为你的 Telegram 账号 ID，向 [@getidsbot](https://t.me/getidsbot) 发送 `/start` 可以获取
 2. `bot-token` 为你的 Bot Token，向 [@BotFather](https://t.me/botfather) 申请 Bot，获取 `bot-token`（由`数字:数字字母`构成，如`1111122222:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`），获取完毕后记得向 Bot 本身发送 `/start` 之类的消息以让其获悉你的 id
-3. `local-proxy` 为你的代理，如 `socks5://127.0.0.1:7890`，留空则不使用代理
-4. `base-url` 为你的 luoxu 后端地址，如 `http://localhost:9008`
-5. `base-url-prefix` 为你的 luoxu 后端地址前缀，如 `luoxu`
+3. `show-log` 为是否显示 Bot 的日志，`true` 为显示，`false` 为不显示
+4. `local-proxy` 为你的代理，如 `socks5://127.0.0.1:7890`，留空则不使用代理
+5. `base-url` 为你的 luoxu 后端地址，如 `http://localhost:9008`
+6. `base-url-prefix` 为你的 luoxu 后端地址前缀，如 `luoxu`
 
 # 使用
 - `/list` 获取已索引群组的列表和相关信息

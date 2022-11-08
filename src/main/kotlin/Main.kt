@@ -12,13 +12,15 @@ fun main() {
     configInit()
     val bot = bot {
         token = BOT_TOKEN
-        proxy = getProxy()
+        if(getProxy() != null) {
+            proxy = getProxy()!!
+        }
         dispatch {
             command("list") { getGroupList() }
             text() { beforeSearch() }
             callbackQuery { afterSearch() }
         }
-//        logLevel = LogLevel.All()
+        logLevel = if (SHOW_LOG) LogLevel.All() else LogLevel.None
     }
     bot.startPolling()
 }

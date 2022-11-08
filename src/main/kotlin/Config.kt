@@ -2,6 +2,7 @@ import java.io.File
 
 var MY_ID = 0L
 var BOT_TOKEN: String = ""
+var SHOW_LOG: Boolean = false
 var LOCAL_PROXY = ""
 var BASE_URL = "http://localhost:9008"
 var BASE_URL_PREFIX = "luoxu"
@@ -18,6 +19,7 @@ fun configInit() {
                 when {
                     startsWith("my-id:") -> MY_ID = value.toLong()
                     startsWith("bot-token:") -> BOT_TOKEN = value
+                    startsWith("show-log:") -> SHOW_LOG = value.toBoolean()
                     startsWith("local-proxy:") -> LOCAL_PROXY = value
                     startsWith("base-url:") -> BASE_URL = value
                     startsWith("base-url-prefix:") -> BASE_URL_PREFIX = value

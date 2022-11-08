@@ -15,8 +15,8 @@ import java.net.Proxy
 
 fun String.containsEnhanced(vararg strs: String) = strs.any { this.contains(it) }
 
-fun getProxy(): Proxy {
-    if (LOCAL_PROXY == "") return Proxy.NO_PROXY
+fun getProxy(): Proxy? {
+    if (LOCAL_PROXY == "") return null
     val proxyType = if (LOCAL_PROXY.contains("http")) Proxy.Type.HTTP else Proxy.Type.SOCKS
     val proxyAddress = LOCAL_PROXY.substringAfter("://").substringBefore(":")
     val proxyPort = LOCAL_PROXY.substringAfter("://").substringAfter(":").toInt()

@@ -54,7 +54,7 @@ fun CallbackQueryHandlerEnvironment.afterSearch() {
         timeLocal.timeZone = TimeZone.getTimeZone("Asia/Shanghai")
         resultString += "`【${message.from_name} 于 " + //每条大概宽限 380 个字符
                 "${timeLocal.format(message.t * 1000)}】说：`\n" +
-                message.html.pureMessage().highlight(searchKeyword!!) +
+                message.html.pureMessage().highlight(searchKeyword) +
                 "\n[（查看群组原消息）](https://t.me/c/${message.group_id}/${message.id})\n\n"
     }
     val inlineKeyboardMarkup: InlineKeyboardMarkup

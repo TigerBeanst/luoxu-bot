@@ -114,6 +114,17 @@ fun String.pureMessage(): String {
     return result + if (webpageFlag) "`" else ""
 }
 
+fun String.pureNoneMarkDown():String{
+    return this.replace("*", "\\*")
+        .replace("_", "\\_")
+        .replace("__", "\\_\\_")
+        .replace("[", "\\[")
+        .replace("]", "\\]")
+        .replace("(", "\\(")
+        .replace(")", "\\)")
+        .replace("`", "\\`")
+}
+
 fun String.highlight(keyword: String, length: Int = 380): String {
     if (keyword.containsEnhanced(" ", " OR ", " - ")
         || (keyword.contains("(") && keyword.contains(")"))
@@ -135,5 +146,5 @@ fun String.highlight(keyword: String, length: Int = 380): String {
     } else {
         this
     }
-    return result.replace(keyword, "_${keyword}_")
+    return result.pureNoneMarkDown().replace(keyword, "_${keyword}_")
 }
